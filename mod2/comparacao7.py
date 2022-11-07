@@ -21,4 +21,4 @@ for numero in range(18, 111):
 # "Realizando Passo X"
 for numero in range(1, 11):
     print('Realizando passo', numero)
-    print(f'Realizando passo {numero}')
+    print(f'Realizando passo {numero}') #Exemplo professor
