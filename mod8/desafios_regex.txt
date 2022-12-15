@@ -1,0 +1,76 @@
+# Desafio 1
+
+basicamente so digitar a palavra desejada, no caso simples
+Olá! sou uma frase simples
+
+# Desafio 2
+
+Só digitar o numero desejado 
+
+dev123com
+developer 123
+dev = 123
+dev = 1234
+dev = 1337
+dev = 9000
+
+# Desafio 3 - Encontre todos os valores, onde o valor inicial é 2, porém o segundo valor você não conhece.
+
+Utilize 2\d dessa forma o 2 sera o numero inicial e o \d sera numeros decorrentes que você desconhece
+
+dev123com
+developer 123
+dev = 123
+dev = 1234
+dev = 1337
+dev = 9000
+
+# Desafio 4 - Usando os valores a seguir, encontre os seguintes números completo, usando regex
+
+\d\d\.\d\d\.\d\d - dessa forma temos o \d pra digito, e \. pra localizar pontos
+
+13.35.86
+22.36.77
+53.12.34
+
+# Desafio 5 - Crie um regex para encontrar o seguinte padrão. Encontre apenas as combinações de acordo com o destrito abaixo
+
+[tjn]ah - vamos começa a busca pelas letras iniciais entre [tjn] dessa forma filtrando, e o restante da palavra no caso ah
+
+bah pular
+tah encontra
+jah encontra
+nah encontra
+uai pular
+
+# Desafio 6 - Encontre a combinação de acordo com o descrito abaixo
+
+[(]123[)]\d\d\d\d[-]\d\d\d\d
+
+(123)1234-1235 encontrar
+(123)1234-1235 encontra
+(129)1234-1235 pular
+(129)1234-1235 pular
+
+# Desafio 7 - Usando regex, encontre apenas a sequencia 1234 abaixo
+
+[1-4]
+
+1234 encontrar
+6462 pular
+
+# Desafio 8 - Usando regex, encontre apenas as letras iniciando de p a vai
+
+[p-v] - muito ruim por sinal 
+
+pqrstuv encontrar
+wxyz pular
+abcdefg pular
+
+# Desafio 9 - Crie uma regex para encontrar tanto pizza enviadas como pizza enviada
+
+pizzas? enviadas? - Sempre coloque no plural no buscador acompanhado do simbolo de "?" 
+
+2 pizzas enviadas
+1 pizza enviada
+3 pizzas enviadas

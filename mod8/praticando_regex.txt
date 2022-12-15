@@ -1,0 +1,152 @@
+Como usar a função regex, Crtl + F e marque apenas a opção .*
+
+Olá :), sou uma frase simples
+
+\ + D e utilizada quando não sabemos ou queremos descobrir todos os numeros, ou ser utilizado quando não sabemos o numero a ser procurado
+dev123com
+developer 123
+dev = 123
+dev = 1234
+dev = 1337
+dev = 9000
+
+\ + . e utilizado para localizar o ponto, pois . e um coringa e é utilizado quando quer descobrir sequencia de letras/numeros cada ponto representa uma letra/numero
+asd.
+112.
+1@#.
+12.234 = ..\....
+18.335.346 = ..\....\....
+23.235.756 = ..\....\....
+56.863.623 = ..\....\....
+
+[] utilizado para localizar palavras na ordem pedida ex [oa] comece com o ou a mas se for so isso vai ser feito uma busca, onde tudo com o ou a apareça
+por isso pra ser mais especifico utiliza se 2 [] entre eles a quantidade de . representando letras entre as letras selecionadadas
+opa = [oa].[a]
+outra
+ata = [oa].[a]
+ola = [oa].[a]
+tola = [oa].[a]
+puxar
+
+# Vamos imaginar o caso de um numero de celular, ou qualquer outro padrão, para confirmar uma combinação válida. Exemplo:
+(23)99255-1231 = [(]\d\d[)]\d\d\d\d\d[-]\d\d\d\d - caracteres entre [] e \d = numero ou letra
+
+# Permitir apenas numeros selecionadados 
+55(23)99200-8755 = [5][5][(]\d\d[)]\d\d\d\d\d[-]\d\d\d\d - quando colocamos algo entre [] ele sera selecionado. tanto numeros, letras, caracteres
+45(23)99200-8755
+33(23)99200-8755
+
+# ignorar algo 
+[^w] encontra todos caracteres menos o selecionado
+hey encontrar
+tey encontrar
+vei encontrar
+way pular 
+
+# [(][^5][^5][)] utilizado pra ignorar 55
+(55)1234-1235 encontrar
+(62)1234-1235 encontra
+(47)1234-1235 pular
+(89)1234-1235 pular
+
+# Em alguns casos você terá que validar valores dentro de uma faixa, mas para evitar de digitar eles todos individualmente
+# Quero todos numeros de 5 a 9
+utiliza o - pra representa uma faixa
+123456789 = [5-9]
+# Quero todas letras entre t a z
+abcdefghijklmnopqrstuvwyxz = t-z]
+
+# Uma sacada legal para casos onde você estará recebendo apenas parar receber letras e números(que não contém acentos latinos) é o uso do \w que
+representa todas letras de a a z em maiúsculo ou minúsculo e também todos os números de 1 a 0
+abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ#$¨&#@&çóíúá
+
+# Encontrando repetições de um padrão mais rapidamente
+45-8888-88888 \d{4,5} minimo , maximo
+45-5555-88888 8{4,5} utilizado o primeiro como foco padrão de repetição no caso '8'
+
+# Vamos imaginar que estamos criando um filtro de gírias aceitáveis dentro da nossa aplicação. Sendo que as únicas combinações aceitáveis seriam:
+'zoeira', 'zueira', 'zuera'. Ou seja, apenas quando a palavra é iniciada com uma das 3 possíveis combinações de 3 primeiras letras: zoe,zue.
+zoeira encontrar [zueo]{3}
+zueira encontrar
+zuera encontrar
+suera pular
+
+# Outra situação onde você simplesmente quer validar que uma quantidade especifica de caracteres sejam usados em suas aplicações você poderia
+combinar o poder do generalismo do . com o poder das repetição que as chaves te passam.
+# Vamos imaginar que uma senha precisa ter no mínimo 8 caracteres, independente dos caracteres que forem digitados dentro do campo
+
+.{8}
+12314567
+asdfgfhs
+*&%$&$%$
+G4D%&264
+
+# Uma ou mais repetições
+# Para todos caracteres e metacaracteres, podemos usar  + para encontrar combinações somente quando houver, nó minímo uma ou mais ocorrências. Exemplo:
+   d+
+deev encontrar
+ddev encontrar
+dddeva encontrar
+devi encontrar
+eve pular
+
+# Podemos também encontrar combinações onde é iniciado de alguma forma e o restante pode ser qualquer combinação de caracteres usando o .*
+dev.* não importa o que vem depois do  .*
+.*trar caso não importe o que vem antes do trar ou em exemplo .*\.gmail
+devi encontrar
+devo encontrar
+devu encontrar
+deva encontrar
+dev olhar
+
+# Em alguns casos, você estará lidando com caracteres opcionais, que podem ser encontrados através do metacaracter ?(interrogação) que representação
+que um caracter é opcional. Ele te permite represetar tanto zero ou um do caracter ou grupo precedente.Ex:dados?irá encontrar tanto "dados com "dado"
+# Porém caso você precise encontrar o ponto de interrogação em sí, por se tratar de um meractere você deve escapar ele \?
+# Vamos pensar nas frases abaixo
+  arquivos? baixados? no regex encontra tanto o singular como plural
+5 arquivos baixados
+1 arquivo baixados
+3 arquivos baixados
+
+# Espaço em branco
+# Em diversos cenários onde você está lidando com entrada de dados de usuários ou em qualquer aplicação usada no mundo real, você terá que lidar com
+espaço em suas aplicações, isso porque o espaço em brando nos ajuda a deixar textos mais legíveis e nos auda separar uma palavra da outra, porém se 
+não ticer ciente deste espaço em branco em sua expressões regulares, elas podem simplismente não funcionar.
+
+* espaço no localizador
+* tab (\t)
+* nova linha (\n)
+* botão enter (\r)
+* Para lidar com qualqeur tipo de espaço em branco (\s)
+
+1. olá  - \d\.\s
+2.  olá  - \d\.\s+olá
+3.      olá
+4.olá
+
+# Declarando início e fim
+# Para que você crie um regex o mais preciso possível, podemos usar os delimitadores de início e fim que deve ser encontrados
+# O que é possível através dos ^(chapelzinho) e $(crifrão do dolar)
+^hora de codar$ 
+Hora de codar
+Tá na hora de codar 
+Já chegou a hora de codar
+
+# Capturando grupos
+# Qualquer padrão encontrado dentro desses parentes serão colocados em um grupo que poderá ser utilizado posteriormente, isso pode ser útil para
+extrair numeros de telefones ou e-mails por exemplo.
+
+(^imagem.+\.)(jpg)
+imagem_s121fa.jpg
+imagem_FFDD.jpg
+relatorio_agosto.pdf
+
+# Capturar um sub-grupo
+
+(\w+)(@\w+\.)(com\.br|com)
+amanda@hotmail.com
+jeff@outlook.com
+carol@gmail.com.br
+
+(([(]\d{2}[)])(\d{5})([-]\d{4}))
+(33)99200-1885
