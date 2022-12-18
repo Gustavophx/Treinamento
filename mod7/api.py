@@ -53,3 +53,6 @@ pprint(resultado_delete.json())
 
 
 # Consultando APIs usando Postman
+
+
+#como entra em um ambiente virtual ja criado ex: .\test\Scripts\activate
